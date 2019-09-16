@@ -121,19 +121,19 @@ body {
 }
 
 #menu-tile, #specials-tile, #map-tile {
-  height: 950px;
-  /*height: 100%;*/
+  height: 700px;
+  /*height: 80%;*/
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   position: relative;
-  border: 2px solid #3F0C1F;
+  /*border: 2px solid #3F0C1F;*/
   overflow: hidden;
 }
 #menu-tile:hover, #specials-tile:hover, #map-tile:hover {
   /*box-shadow: 0 1px 5px 1px #cccccc;*/
 }
 #menu-tile {
-  background: url('../images/timefortea.jpg') no-repeat;
+  background: url('../images/rain_deer_large.jpg') no-repeat;
   background-position: center;
 }
 #specials-tile {
@@ -272,11 +272,18 @@ h3.menu-item-title {
     background: url('../images/jumbotron_768.jpg') no-repeat;
     height: 432px;
   }
+  
   /* End Home Page */
 }
 
 /********** Extra small devices only **********/
 @media (max-width: 767px) {
+
+  #menu-tile {
+  background: url('../images/rain_deer_small.jpg') no-repeat;
+  background-position: center;
+  height: 300px;
+}
   /* Header */
   .navbar-brand {
     padding-top: 10px;
