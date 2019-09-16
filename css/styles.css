@@ -280,7 +280,7 @@ h3.menu-item-title {
 @media (max-width: 767px) {
 
   #menu-tile {
-  background: url('../images/rain_deer_small.jpg') no-repeat;
+  background: url('../images/rain_deer_extra_small.jpg') no-repeat;
   background-position: center;
   height: 500px;
 }
