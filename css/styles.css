@@ -121,7 +121,7 @@ body {
 }
 
 #menu-tile, #specials-tile, #map-tile {
-  height: 700px;
+  height: 890px;
   /*height: 80%;*/
   width: 100%;
   margin-bottom: 0px;
@@ -282,7 +282,7 @@ h3.menu-item-title {
   #menu-tile {
   background: url('../images/rain_deer_small.jpg') no-repeat;
   background-position: center;
-  height: 300px;
+  height: 500px;
 }
   /* Header */
   .navbar-brand {
