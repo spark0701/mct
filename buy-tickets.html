@@ -98,7 +98,9 @@
 <option value="6 Tickets">6 Tickets $120.00 CAD</option>
 </select> 
 
-<br><br>
+<br>
+<p id="demo"></p>
+<br>
 <script type="text/javascript">
 
 function getSelectedIndex() {
@@ -106,7 +108,9 @@ function getSelectedIndex() {
 //var e = document.getElementByTag("option");
 var index = e.selectedIndex;
 var strUser = e.options[e.selectedIndex];
-window.alert(index);
+document.getElementById("demo").innerHTML = "You selected index: " + (index + 1);
+
+for (i = 0; i < index; i++)
 
 }
 
