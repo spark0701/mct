@@ -97,10 +97,11 @@
 <option value="5 Tickets">5 Tickets $100.00 CAD</option>
 <option value="6 Tickets">6 Tickets $120.00 CAD</option>
 </select> 
+<br>
 
-<br>
-<p id="demo"></p>
-<br>
+<p id="demo1"></p>
+<p id="demo2"></p>
+
 <script type="text/javascript">
 
 function getSelectedIndex() {
@@ -108,9 +109,11 @@ function getSelectedIndex() {
 //var e = document.getElementByTag("option");
 var index = e.selectedIndex;
 var strUser = e.options[e.selectedIndex];
-document.getElementById("demo").innerHTML = "You selected index: " + (index + 1);
-
-for (i = 0; i < index; i++)
+document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
+// for (i = 0; i < index+1; i++) {
+//   document.innerHTML = "Ticket Holder Name";
+//   document.innerHTML = "<input class=\"form-control\" name=\"os1\" type=\"text\">";
+// }
 
 }
 
