@@ -100,8 +100,15 @@
 <br>
 
 <p id="demo1"></p>
-<p id="demo2"></p>
 
+    <input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Ticket Main Holder Name (Mandatory)
+    <input class="form-control" name="os1" type="text">
+    <!-- <input type="hidden" for="formForos2" name="on2" value="Email">Email address
+    <input class="form-control" name="os2" type="text">
+     -->
+ 
+<br>
+<p id="NameText"></p>
 <script type="text/javascript">
 
 function getSelectedIndex() {
@@ -110,23 +117,15 @@ function getSelectedIndex() {
 var index = e.selectedIndex;
 var strUser = e.options[e.selectedIndex];
 document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
-// for (i = 0; i < index+1; i++) {
-//   document.innerHTML = "Ticket Holder Name";
-//   document.innerHTML = "<input class=\"form-control\" name=\"os1\" type=\"text\">";
-// }
+var text = "";
+for (i = 0; i < index; i++) {
+  text += "Ticket Holder Name (optional): ";
+  text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" + "<br>"  
 
 }
-
+document.getElementById("NameText").innerHTML = text;
+}
 </script>
-<br>
-<br>
-    <input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Ticket Holder Name
-    <input class="form-control" name="os1" type="text">
-    <input type="hidden" for="formForos2" name="on2" value="Email">Email address
-    <input class="form-control" name="os2" type="text">
-    
- 
-<br><br>
 <input type="hidden" name="currency_code" value="CAD">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 
