@@ -89,7 +89,7 @@
     <div class="form-group">
     <input type="hidden" name="on0" value="MCT Tickets">
 <div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-6">
+<div class="col-lg-3 col-sm-4 col-xs-8">
 <select class="input-small form-control" onchange="getSelectedIndex();" id="ticket-number-select" name="os0"  value="MCT Tickets"> 
 <option class="input-small" value="1 Ticket">1 Ticket $20.00 CAD</option>
 <option class="input-small" value="2 Tickets">2 Tickets $40.00 CAD</option>
@@ -104,19 +104,19 @@
 <p id="demo1"></p>
 
 <div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-6">
+<div class="col-lg-3 col-sm-4 col-xs-8">
 <input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Guest Name 1 (Mandatory)
 <input class="form-control" name="os1" type="text">
 </div>
 </div>
 <div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-6">
+<div class="col-lg-3 col-sm-4 col-xs-8">
 <input type="hidden" for="formForos2" name="on2" value="Email">Email address 1 (Optional)
 <input class="form-control" name="os2" type="text">
 </div>
 </div>
 <div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-6">
+<div class="col-lg-3 col-sm-4 col-xs-8">
 <input type="hidden" for="formForos2" name="on3" value="Phone">Phone number 1 (Optional)
 <input class="form-control" name="os3" type="text">
 </div>
@@ -134,17 +134,17 @@ var strUser = e.options[e.selectedIndex];
 // document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
 var text = "";
 for (i = 0; i < index; i++) {
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-6\">";
+  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
   text += "<input type=\"hidden\" name=\"on1\" for=\"formForos1\" name=\"on1\" value=\"Name\">" + "Guest Name " + (i+2) 
   + " (Mandatory)";
   text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" 
         + "</div></div>"; 
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-6\">";
+  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
   text += "<input type=\"hidden\" for=\"formForos2\" name=\"on2\" value=\"Email\">" 
     + "Email address" + (i+2) + " (Optional)";
   text += "<input class=\"form-control\" name=\"os2\" type=\"text\">" 
         + "</div></div>"; 
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-6\">";
+  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
   text += "<input type=\"hidden\" for=\"formForos2\" name=\"on3\" value=\"Phone\">" 
     + "Phone Number" + (i+2) + " (Optional)";
   text += "<input class=\"form-control\" name=\"os3\" type=\"text\">" 
