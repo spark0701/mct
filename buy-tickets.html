@@ -88,25 +88,40 @@
      MCT Tickets: Please select text box below <br>
     <div class="form-group">
     <input type="hidden" name="on0" value="MCT Tickets">
-
-<select onchange="getSelectedIndex();" class="form-control" id="ticket-number-select" name="os0"  value="MCT Tickets"> 
-<option value="1 Ticket">1 Ticket $20.00 CAD</option>
-<option value="2 Tickets">2 Tickets $40.00 CAD</option>
-<option value="3 Tickets">3 Tickets $60.00 CAD</option>
-<option value="4 Tickets">4 Tickets $80.00 CAD</option>
-<option value="5 Tickets">5 Tickets $100.00 CAD</option>
-<option value="6 Tickets">6 Tickets $120.00 CAD</option>
+<div class="row">
+<div class="col-xs-3">
+<select class="input-small form-control" onchange="getSelectedIndex();" id="ticket-number-select" name="os0"  value="MCT Tickets"> 
+<option class="input-small" value="1 Ticket">1 Ticket $20.00 CAD</option>
+<option class="input-small" value="2 Tickets">2 Tickets $40.00 CAD</option>
+<option class="input-small" value="3 Tickets">3 Tickets $60.00 CAD</option>
+<option class="input-small" value="4 Tickets">4 Tickets $80.00 CAD</option>
+<option class="input-small" value="5 Tickets">5 Tickets $100.00 CAD</option>
+<option class="input-small" value="6 Tickets">6 Tickets $120.00 CAD</option>
 </select> 
+</div>
+</div>
 <br>
-
 <p id="demo1"></p>
 
-    <input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Ticket Main Holder Name (Mandatory)
-    <input class="form-control" name="os1" type="text">
-    <!-- <input type="hidden" for="formForos2" name="on2" value="Email">Email address
-    <input class="form-control" name="os2" type="text">
-     -->
- 
+<div class="row">
+<div class="col-xs-3">
+<input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Guest Name 1 (Mandatory)
+<input class="form-control mx-sm-3" name="os1" type="text">
+</div>
+</div>
+<div class="row">
+<div class="col-xs-3">
+<input type="hidden" for="formForos2" name="on2" value="Email">Email address 1 (Optional)
+<input class="form-control form-control-sm" name="os2" type="text">
+</div>
+</div>
+<div class="row">
+<div class="col-xs-3">
+<input type="hidden" for="formForos2" name="on3" value="Phone">Phone number 1 (Optional)
+<input class="form-control form-control-sm" name="os3" type="text">
+</div>
+</div>
+    
 <br>
 <p id="NameText"></p>
 <script type="text/javascript">
@@ -116,13 +131,27 @@ function getSelectedIndex() {
 //var e = document.getElementByTag("option");
 var index = e.selectedIndex;
 var strUser = e.options[e.selectedIndex];
-document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
+// document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
 var text = "";
 for (i = 0; i < index; i++) {
-  text += "Ticket Holder Name (optional): ";
-  text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" + "<br>"  
+  text += "<div class=\"row\">" + "<div class=\"col-xs-3\">";
+  text += "<input type=\"hidden\" name=\"on1\" for=\"formForos1\" name=\"on1\" value=\"Name\">" + "Guest Name " + (i+2) 
+  + " (Mandatory)";
+  text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" 
+        + "</div></div>"; 
+  text += "<div class=\"row\">" + "<div class=\"col-xs-3\">";
+  text += "<input type=\"hidden\" for=\"formForos2\" name=\"on2\" value=\"Email\">" 
+    + "Email address" + (i+2) + " (Optional)";
+  text += "<input class=\"form-control\" name=\"os2\" type=\"text\">" 
+        + "</div></div>"; 
+  text += "<div class=\"row\">" + "<div class=\"col-xs-3\">";
+  text += "<input type=\"hidden\" for=\"formForos2\" name=\"on3\" value=\"Phone\">" 
+    + "Phone Number" + (i+2) + " (Optional)";
+  text += "<input class=\"form-control\" name=\"os3\" type=\"text\">" 
+        + "</div></div><br>";             
 
 }
+//populate all the text feilds here
 document.getElementById("NameText").innerHTML = text;
 }
 </script>
