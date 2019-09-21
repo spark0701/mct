@@ -81,84 +81,67 @@
       
       
 
-    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <!-- <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_s-xclick">
     <input type="hidden" name="hosted_button_id" value="QTG8XN2NYEMMU">
+ -->
+
+ <form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="business" value="sb-m43vy0238341@business.example.com">
+    <input type="hidden" name="hosted_button_id" value="VXHUDMYUSKK3Q">
 
      MCT Tickets: Please select text box below <br>
     <div class="form-group">
     <input type="hidden" name="on0" value="MCT Tickets">
 <div class="row">
 <div class="col-lg-3 col-sm-4 col-xs-8">
-<select class="input-small form-control" onchange="getSelectedIndex();" id="ticket-number-select" name="os0"  value="MCT Tickets"> 
-<option class="input-small" value="1 Ticket">1 Ticket $20.00 CAD</option>
-<option class="input-small" value="2 Tickets">2 Tickets $40.00 CAD</option>
-<option class="input-small" value="3 Tickets">3 Tickets $60.00 CAD</option>
-<option class="input-small" value="4 Tickets">4 Tickets $80.00 CAD</option>
-<option class="input-small" value="5 Tickets">5 Tickets $100.00 CAD</option>
-<option class="input-small" value="6 Tickets">6 Tickets $120.00 CAD</option>
+<select class="form-control" onchange="getSelectedIndex();" id="ticket-number-select" name="os0"  value="MCT Tickets"> 
+
+<!-- <select class="input-small form-control" onchange="getSelectedIndex();" id="ticket-number-select">  -->
+ <option class="input-small" value="1 Ticket" option_index>1 Ticket $20.00 CAD</option>
+<option class="input-small" value="2 Tickets" option_index="1">2 Tickets $40.00 CAD</option>
+<option class="input-small" value="3 Tickets" option_index="2">3 Tickets $60.00 CAD</option>
+<option class="input-small" value="4 Tickets" option_index="3">4 Tickets $80.00 CAD</option>
+<option class="input-small" value="5 Tickets" option_index="4">5 Tickets $100.00 CAD</option>
+<option class="input-small" value="6 Tickets" option_index="5">6 Tickets $120.00 CAD</option>
 </select> 
 </div>
 </div>
 <br>
-<p id="demo1"></p>
+
+
 
 <div class="row">
 <div class="col-lg-3 col-sm-4 col-xs-8">
-<input type="hidden" name="on1" for="formForos1" name="on1" value="Name">Guest Name 1 (Mandatory)
-<input class="form-control" name="os1" type="text">
+<!-- <input type="hidden" for="formForos1" name="on1" value="Name">Guest Name 1 (Mandatory)
+<input class="form-control" name="os1" type="text"> -->
+Guest Name 1 (Mandatory) 
+<input class="form-control" type="text" id="guestName1" required placeholder="Enter Guest Name">
+Email or Phone Number 1 (Optional)
+<input class="form-control" type="text" id="email_phone1">
+<input type="hidden" name="on1" value="guestInfo1">
+<input id="guestInfoData1" type="hidden" name="os1">
 </div>
 </div>
-<div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-8">
-<input type="hidden" for="formForos2" name="on2" value="Email">Email address 1 (Optional)
-<input class="form-control" name="os2" type="text">
-</div>
-</div>
-<div class="row">
-<div class="col-lg-3 col-sm-4 col-xs-8">
-<input type="hidden" for="formForos2" name="on3" value="Phone">Phone number 1 (Optional)
-<input class="form-control" name="os3" type="text">
-</div>
-</div>
-    
+
+<p id="index_number"></p>
+<p id="guest_info_field"></p>
+<p id="guest_info_concat"></p>
+
+<!-- <button onclick="gettingGuestData()">hello</button> -->
 <br>
-<p id="NameText"></p>
-<script type="text/javascript">
-
-function getSelectedIndex() {
-  var e = document.getElementById('ticket-number-select');
-//var e = document.getElementByTag("option");
-var index = e.selectedIndex;
-var strUser = e.options[e.selectedIndex];
-// document.getElementById("demo1").innerHTML = "You selected index: " + (index + 1);
-var text = "";
-for (i = 0; i < index; i++) {
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
-  text += "<input type=\"hidden\" name=\"on1\" for=\"formForos1\" name=\"on1\" value=\"Name\">" + "Guest Name " + (i+2) 
-  + " (Mandatory)";
-  text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" 
-        + "</div></div>"; 
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
-  text += "<input type=\"hidden\" for=\"formForos2\" name=\"on2\" value=\"Email\">" 
-    + "Email address" + (i+2) + " (Optional)";
-  text += "<input class=\"form-control\" name=\"os2\" type=\"text\">" 
-        + "</div></div>"; 
-  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
-  text += "<input type=\"hidden\" for=\"formForos2\" name=\"on3\" value=\"Phone\">" 
-    + "Phone Number" + (i+2) + " (Optional)";
-  text += "<input class=\"form-control\" name=\"os3\" type=\"text\">" 
-        + "</div></div><br>";             
-
-}
-//populate all the text feilds here
-document.getElementById("NameText").innerHTML = text;
-}
-</script>
 <input type="hidden" name="currency_code" value="CAD">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-
+<!-- <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+ -->
+<button type="submit" onclick="gettingGuestData()" style="border: 0; background: transparent">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_SM.gif" border="0" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</button>
+
+<!-- <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+<script>paypal.Buttons().render('body');</script> -->
 </form>
 
 </div>
@@ -185,6 +168,68 @@ document.getElementById("NameText").innerHTML = text;
       </div> -->
     </div><!-- End of #home-tiles -->
   </div><!-- End of #main-content -->
+
+  <script type="text/javascript">
+function getSelectedIndex() {
+  var e = document.getElementById('ticket-number-select');
+  //var e = document.getElementByTag("option");
+  var index = e.selectedIndex;  
+  var strUser = e.options[e.selectedIndex];
+  //document.getElementById("index_number").innerHTML = "You selected index: " + (index + 1);
+  var text = "";
+for (i = 0; i < index; i++) {
+  text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
+  text += "Guest Name "+ (i+2) + " (Mandatory)";
+  text += "<input class=\"form-control\" type=\"text\" id=\"guestName"+(i+2)+"\" required placeholder=\"Enter Guest Name\">";
+  text += "Email or Phone Number" + (i+2) +" (Optional)";
+  text += "<input class=\"form-control\" type=\"text\" id=\"email_phone"+(i+2)+"\">"
+  text += "<input type=\"hidden\" name=\"on"+(i+2)+"\"" + "value=\"guestInfo" +(i+2)+"\">";
+  text += "<input id=\"guestInfoData"+(i+2)+"\"" + "type=\"hidden\" name=\"os"+(i+2)+"\">";
+  text += "</div></div><br>";
+  // text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
+  // text += "<input type=\"hidden\" name=\"on1\" value=\"Name\">" + "Guest Name " + (i+2) 
+  // + " (Mandatory)";
+  // text += "<input class=\"form-control\" name=\"os1\" type=\"text\">" 
+  //       + "</div></div>"; 
+  // text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
+  // text += "<input type=\"hidden\" for=\"formForos2\" name=\"on2\" value=\"Email\">" 
+  //   + "Email address" + (i+2) + " (Optional)";
+  // text += "<input class=\"form-control\" name=\"os2\" type=\"text\">" 
+  //       + "</div></div>"; 
+  // text += "<div class=\"row\">" + "<div class=\"col-lg-3 col-sm-4 col-xs-8\">";
+  // text += "<input type=\"hidden\" for=\"formForos2\" name=\"on3\" value=\"Phone\">" 
+  //   + "Phone Number" + (i+2) + " (Optional)";
+  // text += "<input class=\"form-control\" name=\"os3\" type=\"text\">" 
+  //       + "</div></div><br>";             
+  }
+  //populate all the text feilds here
+  document.getElementById("guest_info_field").innerHTML = text;
+}
+
+function gettingGuestData() {
+  var e = document.getElementById('ticket-number-select');
+  var index = e.selectedIndex; 
+  // window.alert("are u here");
+  // document.getElementById("guestInfoData1").value = document.getElementById("guestName1").value;
+  // document.getElementById("guestInfoData2").value = document.getElementById("guestName2").value;
+
+  for (i=0; i < index+1 ; i++) {
+    var guestName = document.getElementById("guestName"+(i+1)).value;
+    var email_phone = document.getElementById("email_phone"+(i+1)).value;
+    //window.alert(guestName);
+    if (email_phone.length > 0 ){
+      var data = guestName.concat(", ").concat(email_phone)
+      document.getElementById("guest_info_concat").innerHTML = data;
+      document.getElementById("guestInfoData"+(i+1)).value = data;
+    } else {
+      document.getElementById("guest_info_concat").innerHTML = guestName;
+      document.getElementById("guestInfoData"+(i+1)).value = guestName;
+    }
+  }
+}
+
+</script>
+
 
   <footer class="panel-footer">
     <div class="container">
