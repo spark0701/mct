@@ -1,83 +1,84 @@
 <?php
-namespace Listener;
-
-//include PayPal IPN Class file (https://github.com/paypal/ipn-code-samples/blob/master/php/PaypalIPN.php)
-require('PaypalIPN.php');
 
 //include configuration file
-require('core_config.php');
+echo "Hello world!";
+// For test payments we want to enable the sandbox mode. If you want to put live
+// payments through then this setting needs changing to `false`.
+$enableSandbox = true;
+define("HOST", "127.0.0.1:3306");     // The host you want to connect to.
+define("USER", "newmom");    // The database username. 
+define("PASSWORD", "password0701");    // The database password. 
+define("DATABASE", "motherstea");    // The database name.
 
-use PaypalIPN;
-$ipn = new PaypalIPN();
-if ($enable_sandbox) {$ipn->useSandbox();}
-$verified = true;
+//Connect with database
+$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
-$ipn->verifyIPN();
-
-//reading $_POST data from PayPal
-$data_text = "";
-foreach ($_POST as $key => $value) {
-$data_text .= $key . " = " . $value . "\r\n";
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
 }
+echo "Connected successfully";
 
-// Checking if our paypal email address was changed during payment.
-$receiver_email_found = false;
-if (strtolower($_POST["receiver_email"]) == strtolower($paypal_seller)) {
-$receiver_email_found = true;
-}
+// PayPal settings. Change these to your account details and the relevant URLs
+// for your site.
+$system_mode = 'test'; // set 'test' for sandbox and leave blank for real payments.
+$paypalConfig = [
+    'email' => 'sb-m43vy0238341@business.example.com',
+    'return_url' => 'https://spark0701.github.io/mct/payment-success.html',
+    'cancel_url' => 'http://spark0701.github.io/mct/payment-cancelled.php',
+    'notify_url' => 'http://spark0701.github.io/mct/paypal_ipn.php'
+];
+// Include Functions
+// require 'functions.php';
 
-// Checking if price was changed during payment.
-// Get product price from database and compare with posted price from PayPal
-$correct_price_found = false;
-$prep_stmt = "SELECT price FROM paypal_products WHERE id = ?";
-$stmt = $mysqli->prepare($prep_stmt);
-$item_number = $_POST["item_number"];
-if ($stmt) {
-$stmt->bind_param('s', $item_number);
-$stmt->execute();
-$stmt->store_result();
-$stmt->bind_result($price);
+// Product being purchased.
+$itemName = 'Test Item';
+$itemAmount = 5.00;
 
-if ($stmt->num_rows >= 1) {
-while ($stmt->fetch()) {
-if ($_POST["mc_gross"] == $price) {
-$correct_price_found = true;
-break;
-}
-}
-}
-$stmt->close();
-}
+echo 'are you here at ipn.php???';
 
-//Checking Payment Verification
-$paypal_ipn_status = "PAYMENT VERIFICATION FAILED";
-if ($verified) {
-$paypal_ipn_status = "Email address or price mismatch";
-if ($receiver_email_found || $correct_price_found) {
-$paypal_ipn_status = "Payment has been verified";
+// Check if paypal request or response
+if (!isset($_POST['txn_id']) && !isset($_POST['txn_type'])) {
+	// Grab the post data so that we can set up the query string for PayPal.
+    // Ideally we'd use a whitelist here to check nothing is being injected into
+    // our post data.
+    echo 'are you here at ipn.php!!!';
 
-// Check if payment has been completed and insert payment data to database
-// if ($_POST["payment_status"] == "Completed") {
-// uncomment upper line to exit sandbox mode
+    $data = [];
+    foreach ($_POST as $key => $value) {
+        $data[$key] = stripslashes($value);
+    }
 
-// Insert payment data to database
-if ($insert_stmt = $mysqli->prepare("INSERT INTO paypal_payments (item_no, transaction_id, payment_amount, payment_status) VALUES (?, ?, ?, ?)")) {
-$item_number = $_POST["item_number"];
-$transaction_id = $_POST["txn_id"];
-$payment_amount = $_POST["mc_gross"];
-$payment_status = $_POST['payment_status'];
+    // Set the PayPal account.
+    $data['business'] = $paypalConfig['email'];
 
-$insert_stmt->bind_param('ssss', $item_number, $transaction_id, $payment_amount, $payment_status);
+    // Set the PayPal return addresses.
+    $data['return'] = stripslashes($paypalConfig['return_url']);
+    $data['cancel_return'] = stripslashes($paypalConfig['cancel_url']);
+    $data['notify_url'] = stripslashes($paypalConfig['notify_url']);
 
-if (! $insert_stmt->execute()) {
-$paypal_ipn_status = "Payment has been completed but not stored into database";
-}
-$paypal_ipn_status = "Payment has been completed and stored to database";
-}
-// }
-// uncomment upper line to exit sandbox mode
-}
+    // Set the details about the product being purchased, including the amount
+    // and currency so that these aren't overridden by the form data.
+    $data['item_name'] = $itemName;
+    $data['amount'] = $itemAmount;
+    $data['currency_code'] = 'GBP';
+
+    // Add any custom fields for the query string.
+    //$data['custom'] = USERID;
+
+    // Build the query string from the data.
+    $queryString = http_build_query($data);
+    echo ("<br>");
+    echo ("<br>");
+
+    echo ($queryString);
+
+    // Redirect to paypal IPN
+    //header('location:' . 'https://www.sandbox.paypal.com/cgi-bin/webscr' . '?' . $queryString);
+    //exit();
+
 } else {
-$paypal_ipn_status = "Payment verification failed";
+    // Handle the PayPal response.
 }
-?>
+
+
+
